@@ -21,12 +21,10 @@ export default function AuthPage() {
                     <div className='bg-neutral-900/50 backdrop-blur-xl border border-neutral-800 rounded-2xl p-8'>
                         <AuthForm/>
                         <AuthSocialButtons/>
+                        <AuthFooter/>
                     </div>
-                </div>
-
-                <AuthFooter/>
-
-                </div>
+                </div>  
+            </div>
         </div>
     );
 }
