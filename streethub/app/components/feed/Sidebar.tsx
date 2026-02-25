@@ -6,7 +6,7 @@ import { Home, Compass, User, Store, Calculator, Crown, Settings, TrendingUp } f
 import { Logo } from '@/app/components/shared/Logo';
 import path from "path";
 import { User as CurrentUser } from "@/type/feed";
-import { currentUser } from "@/data/mockData";
+import { mockUsers } from "@/data/mockData";
 import { Avatar } from "../shared/Avatar";
 
 const menuItems = [
@@ -63,13 +63,13 @@ export function Sidebar() {
                     className="flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-900 transition-all"
                     >
                         <Avatar 
-                            src={currentUser.avatar} 
-                            name={currentUser.displayName} 
+                            src={mockUsers[0].avatar} 
+                            name={mockUsers[0].displayName} 
                             size="md"
                             /> 
                             <div className="flex-1 min-w-0">
                                 <p className="font-medium text-white text-sm truncate">
-                                    @{currentUser.username}
+                                    @{mockUsers[0].username}
                                 </p>
                                 <p className="text-xs text-neutral-500">
                                     Ver perfil
