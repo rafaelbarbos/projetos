@@ -1,6 +1,6 @@
-import { User, Supplier, TrendingCategory } from "@/type/feed";
+import { User, Supplier, Post, TrendingCategory } from "@/type/feed";
 
-export const mockUsers: User = [ 
+export const mockUsers: User[] = [ 
     {
     id: "1",
     username: "johndoe",
@@ -62,6 +62,183 @@ export const mockSuppliers: Supplier[] = [
     { id: '3', name: 'Weidian Streetwear',  rating: 4.6, totalOrders: 8900,  verified: true,  responseTime: '< 3h', avatar: '👕' },
     { id: '4', name: '1688 Direct',         rating: 4.7, totalOrders: 12300, verified: false, responseTime: '< 5h', avatar: '📦' },
     { id: '5', name: 'Pandabuy Goods',      rating: 4.9, totalOrders: 34200, verified: true,  responseTime: '< 1h', avatar: '🐼' },
+];
+
+export const mockPosts: Post[] = [
+  {
+    id: "1",
+    user: mockUsers[0],
+    image: "https://images.unsplash.com/photo-1721111260570-456f3306f8d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Essentials Hoodie Oversized - Bege Premium",
+    priceYuan: 158,
+    priceReal: 112.50,
+    supplier: mockSuppliers[0],
+    taxed: false,
+    likes: 342,
+    saved: false,
+    liked: false,
+    timestamp: "2h atrás",
+    category: "Moletom",
+    comments: [
+      {
+        id: "1",
+        user: mockUsers[1],
+        text: "Essa peça é insana! Já comprei e a qualidade é top 🔥",
+        timestamp: "1h atrás",
+        likes: 12
+      },
+      {
+        id: "2",
+        user: mockUsers[2],
+        text: "Qual o peso aproximado pra calcular o frete?",
+        timestamp: "45min atrás",
+        likes: 3
+      }
+    ]
+  },
+  {
+    id: "2",
+    user: mockUsers[1],
+    image: "https://images.unsplash.com/photo-1761942028138-2b494760aa3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Dunk Low Panda - Replica 1:1",
+    priceYuan: 280,
+    priceReal: 199.00,
+    supplier: mockSuppliers[1],
+    taxed: true,
+    likes: 856,
+    saved: true,
+    liked: true,
+    timestamp: "5h atrás",
+    category: "Tênis",
+    comments: [
+      {
+        id: "3",
+        user: mockUsers[3],
+        text: "Melhor batch do mercado! Recomendo demais",
+        timestamp: "3h atrás",
+        likes: 45
+      }
+    ]
+  },
+  {
+    id: "3",
+    user: mockUsers[4],
+    image: "https://images.unsplash.com/photo-1764698192198-4cfb7188c6d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Corta-Vento Tech Reflective - Preto",
+    priceYuan: 198,
+    priceReal: 140.85,
+    supplier: mockSuppliers[2],
+    taxed: false,
+    likes: 234,
+    saved: false,
+    liked: false,
+    timestamp: "1d atrás",
+    category: "Jaqueta",
+    comments: []
+  },
+  {
+    id: "4",
+    user: mockUsers[2],
+    image: "https://images.unsplash.com/photo-1499713907394-43c9d094ac2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Camiseta Vintage Graphic - Coleção Street",
+    priceYuan: 68,
+    priceReal: 48.40,
+    supplier: mockSuppliers[0],
+    taxed: false,
+    likes: 189,
+    saved: false,
+    liked: true,
+    timestamp: "2d atrás",
+    category: "Camiseta",
+    comments: [
+      {
+        id: "4",
+        user: mockUsers[0],
+        text: "Print de qualidade? Não desbota na lavagem?",
+        timestamp: "1d atrás",
+        likes: 8
+      },
+      {
+        id: "5",
+        user: mockUsers[2],
+        text: "Lavei 3x e continua perfeita!",
+        timestamp: "20h atrás",
+        likes: 15
+      }
+    ]
+  },
+  {
+    id: "5",
+    user: mockUsers[3],
+    image: "https://images.unsplash.com/photo-1649850874075-49e014357b9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Cargo Pants Tactical - Verde Militar",
+    priceYuan: 145,
+    priceReal: 103.15,
+    supplier: mockSuppliers[3],
+    taxed: false,
+    likes: 421,
+    saved: true,
+    liked: false,
+    timestamp: "3d atrás",
+    category: "Calça",
+    comments: []
+  },
+  {
+    id: "6",
+    user: mockUsers[0],
+    image: "https://images.unsplash.com/photo-1763192756578-7943a4103967?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Beanie Bordado Premium - Collection",
+    priceYuan: 42,
+    priceReal: 29.89,
+    supplier: mockSuppliers[1],
+    taxed: false,
+    likes: 156,
+    saved: false,
+    liked: false,
+    timestamp: "4d atrás",
+    category: "Acessórios",
+    comments: []
+  },
+  {
+    id: "7",
+    user: mockUsers[4],
+    image: "https://images.unsplash.com/photo-1610659592009-088d5c2c4776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Mochila Urban Tech - 30L",
+    priceYuan: 220,
+    priceReal: 156.50,
+    supplier: mockSuppliers[4],
+    taxed: true,
+    likes: 678,
+    saved: true,
+    liked: true,
+    timestamp: "5d atrás",
+    category: "Acessórios",
+    comments: [
+      {
+        id: "6",
+        user: mockUsers[1],
+        text: "Cabe notebook 15 polegadas?",
+        timestamp: "4d atrás",
+        likes: 5
+      }
+    ]
+  },
+  {
+    id: "8",
+    user: mockUsers[1],
+    image: "https://images.unsplash.com/photo-1760126070359-5b82710274fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    title: "Bomber Jacket Reversível - Preto/Laranja",
+    priceYuan: 312,
+    priceReal: 222.00,
+    supplier: mockSuppliers[0],
+    taxed: true,
+    likes: 945,
+    saved: false,
+    liked: true,
+    timestamp: "1sem atrás",
+    category: "Jaqueta",
+    comments: []
+  }
 ];
 
 // ── Usuário logado (mock) ──────────────────────────────────────────────────

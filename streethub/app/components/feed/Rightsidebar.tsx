@@ -9,7 +9,7 @@ import { mockUsers, mockSuppliers, trendingCategories } from "@/data/mockData";
 
 export function Rightsidebar() {
     return(
-        <aside className="fixed right-0 top-0 h-screen w-80 bg-neutral-950 border-l border-neutral overflow-y-auto p-6">
+        <aside className="fixed right-0 top-0 h-screen w-80 bg-neutral-950 border-l border-neutral overflow-y-auto p-6 hidden lg:block">
             {/* Sugestões de usuários */}
             {/* ⚠️  Mock — substituir por dados reais */}
             <div className="mb-8">

@@ -23,7 +23,7 @@ export function Sidebar() {
     const pathname = usePathname();
 
     return(
-        <aside className="fixed left-0 top-0 h-screen w-64 bg-neutral-950 border-r border-neutral-850 flex flex-col p-6">
+        <aside className="fixed left-0 top-0 h-screen w-64 bg-neutral-950 border-r border-neutral-850 flex flex-col p-6 hidden md:flex">
 
             {/*LOGO*/}
             <Link href="/feed" className="mb-10">
