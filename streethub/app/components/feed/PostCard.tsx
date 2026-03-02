@@ -32,7 +32,7 @@ export function PostCard({ post }: PostcardProps) {
         <div className="bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 hover:border-neutral-700 transition-all">
             {/* Header — autor do post */}
             <div className="p-4 flex items-center gap-3">
-                <Link href={`/user/${post.user.id}`}>
+                <Link href={`/${post.user.username}`}>
                     <Avatar
                         src={post.user.avatar}
                         name={post.user.displayName}
@@ -41,7 +41,7 @@ export function PostCard({ post }: PostcardProps) {
                 </Link>
                 <div className="flex-1">
                     <Link 
-                        href={`/user/${post.user.id}`}
+                        href={`/${post.user.username}`}
                         className="flex items-center gap-1 hover:opacity-80"
                         >
                             <span className="font-semibold text-white">{post.user.displayName}
