@@ -6,7 +6,7 @@ import { Home, Compass, User, Store, Calculator, Crown, Settings, TrendingUp } f
 import { Logo } from '@/app/components/shared/Logo';
 import path from "path";
 import { User as CurrentUser } from "@/type/feed";
-import { mockUsers } from "@/data/mockData";
+import { currentUser, mockUsers } from "@/data/mockData";
 import { Avatar } from "../shared/Avatar";
 
 const menuItems = [
@@ -15,7 +15,7 @@ const menuItems = [
     { icon: Store, label: 'Fornecedores', path: '/suppliers' },
     { icon: Calculator, label: 'Calculadora', path: '/calculator' },
     { icon: Crown, label: 'Premium', path: '/premium' },
-    { icon: User, label: 'Perfil', path: '/profile' },
+    { icon: User, label: 'Perfil', path: `/${currentUser.username}` },
     { icon: Settings, label: 'Configurações', path: '/settings' },
 ];
 
@@ -59,17 +59,17 @@ export function Sidebar() {
             {/* ⚠️  Dados mock — substituir por dados reais do contexto de auth */}
             <div className="pt-6 border-t border-neutral-800">
                 <Link
-                    href="/profile"
+                    href={`/${currentUser.username}`}
                     className="flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-900 transition-all"
                     >
                         <Avatar 
-                            src={mockUsers[0].avatar} 
-                            name={mockUsers[0].displayName} 
+                            src={currentUser.avatar} 
+                            name={currentUser.displayName} 
                             size="md"
                             /> 
                             <div className="flex-1 min-w-0">
                                 <p className="font-medium text-white text-sm truncate">
-                                    @{mockUsers[0].username}
+                                    @{currentUser.username}
                                 </p>
                                 <p className="text-xs text-neutral-500">
                                     Ver perfil
