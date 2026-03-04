@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Sidebar } from "../components/feed/Sidebar";
 import { Rightsidebar } from "../components/feed/Rightsidebar";
 import { BottomNav } from "../components/shared/BottomNav";
+import { ProfileHeader } from "../components/profile/Profileheader";
 import { mockUsers, mockPosts } from "@/data/mockData";
 
 //   mockUsers e mockPosts → substituir por:
@@ -40,7 +41,7 @@ export default function UserProfilePage({
 
             <main className="ml-0 md:ml-64 mr-0 lg:mr-80 min-h-screen pb-16 md:pb-0">
                 <div className="max-w-4xl mx-auto p-4 md:p-8">
-                    PROFILE HEADER
+                    <ProfileHeader/>
 
                     PROFILE TABS
 
