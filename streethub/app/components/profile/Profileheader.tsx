@@ -12,10 +12,10 @@ interface ProfileHeaderProps {
 
 export function ProfileHeader({ user, postsCount }: ProfileHeaderProps) {
     return (
-        <div className='bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden mb-8'>
+        <div className='bg-neutral-900 rounded-2xl border border-neutral-800 mb-8'>
 
             {/* COVER */}
-            <div className='h-48 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20 relative'>
+            <div className='h-48 bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-purple-600/20 relative rounded-t-2xl'>
             <div
                 className='absolute inset-0'
                 style={{
@@ -29,7 +29,7 @@ export function ProfileHeader({ user, postsCount }: ProfileHeaderProps) {
 
             <div className='px-4 md:px-8 pb-8'>
                 {/* Avatar + açoes */}
-                <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-16 mb-6 gap-4'>
+                <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-16 mb-6 gap-4 relative z-10'>
                     <div className='border-4 border-neutral-900 rounded-full w-fit'>
                         <Avatar
                             src={currentUser.avatar}
