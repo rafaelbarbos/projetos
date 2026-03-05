@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Compass, Store, Calculator, User } from "lucide-react";
+import { currentUser } from "@/data/mockData";
 
 const items = [
     { icon: Home,       path: '/feed',       label: 'Feed'        },
     { icon: Compass,    path: '/explore',    label: 'Explorar'    },
     { icon: Store,      path: '/suppliers',  label: 'Fornecedores'},
     { icon: Calculator, path: '/calculator', label: 'Calculadora' },
-    { icon: User,       path: '/profile',    label: 'Perfil'      },
+    { icon: User,       path: `/${currentUser.username}`,    label: 'Perfil'      },
 ];
 
 export function BottomNav() { 
