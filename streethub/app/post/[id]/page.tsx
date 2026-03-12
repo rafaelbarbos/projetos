@@ -8,6 +8,7 @@ import { Sidebar } from "@/app/components/feed/Sidebar";
 import { Rightsidebar } from "@/app/components/feed/Rightsidebar";
 import { BottomNav } from "@/app/components/shared/BottomNav";
 import { PostImage } from "@/app/components/post/PostImage";
+import { PostInfo } from "@/app/components/post/PostInfo";
 import { mockPosts } from "@/data/mockData";
 
 // mockPosts → substituir por GET /api/posts/:id
@@ -49,8 +50,8 @@ export default function PostDetailPage({
                         <PostImage src={post.image} alt={post.title} />
                         {/* Coluna direita - detalhe + comentários */}
                         <div className="space-y-6">
-                            POSTINFO
-                            POSTPRINCING
+                            
+                            <PostInfo post={post} />
                             POSTACTIONS
                             POSTCOMMENTS
                         </div>
