@@ -11,6 +11,9 @@ import { PostImage } from "@/app/components/post/PostImage";
 import { PostInfo } from "@/app/components/post/PostInfo";
 import { mockPosts } from "@/data/mockData";
 import { PostPricing } from "@/app/components/post/Postpricing";
+import { PostActions } from "@/app/components/post/Postactions";
+import { PostComments } from "@/app/components/post/Postcomments";
+
 
 // mockPosts → substituir por GET /api/posts/:id
 
@@ -54,8 +57,8 @@ export default function PostDetailPage({
                             
                             <PostInfo post={post} />
                             <PostPricing post={post} />
-                            POSTACTIONS
-                            POSTCOMMENTS
+                            <PostActions post={post} />
+                            <PostComments post={post} />
                         </div>
                     </div>
                     
