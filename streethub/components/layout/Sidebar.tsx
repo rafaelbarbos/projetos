@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Compass, User, Store, Calculator, Crown, Settings, TrendingUp } from "lucide-react";
-import { Logo } from '@/app/components/shared/Logo';
+import { Logo } from '@/components/shared/Logo';
 import path from "path";
-import { User as CurrentUser } from "@/type/feed";
+import { User as CurrentUser } from "@/types/feed";
 import { currentUser, mockUsers } from "@/data/mockData";
 import { Avatar } from "../shared/Avatar";
 

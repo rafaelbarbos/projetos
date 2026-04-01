@@ -4,15 +4,15 @@ import { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { Sidebar } from "@/app/components/feed/Sidebar";
-import { Rightsidebar } from "@/app/components/feed/Rightsidebar";
-import { BottomNav } from "@/app/components/shared/BottomNav";
-import { PostImage } from "@/app/components/post/PostImage";
-import { PostInfo } from "@/app/components/post/PostInfo";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { Rightsidebar } from "@/components/layout/RightSidebar";
+import { BottomNav } from "@/components/shared/BottomNav";
+import { PostImage } from "@/components/post/PostImage";
+import { PostInfo } from "@/components/post/PostInfo";
 import { mockPosts } from "@/data/mockData";
-import { PostPricing } from "@/app/components/post/Postpricing";
-import { PostActions } from "@/app/components/post/Postactions";
-import { PostComments } from "@/app/components/post/Postcomments";
+import { PostPricing } from "@/components/post/PostPricing";
+import { PostActions } from "@/components/post/PostActions";
+import { PostComments } from "@/components/post/PostComments";
 
 
 // mockPosts → substituir por GET /api/posts/:id

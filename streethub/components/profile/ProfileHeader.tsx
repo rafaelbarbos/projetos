@@ -2,7 +2,7 @@
 
 import { CheckCircle, MapPin, Calendar, Settings } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
-import type { User } from '@/type/feed';
+import type { User } from '@/types/feed';
 import { currentUser } from '@/data/mockData';
 
 interface ProfileHeaderProps {

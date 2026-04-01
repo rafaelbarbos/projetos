@@ -4,7 +4,7 @@ import { use, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Heart, MessageCircle, Bookmark, Calculator, CheckCircle, AlertCircle, Divide } from "lucide-react";
-import type { Post } from "@/type/feed";
+import type { Post } from "@/types/feed";
 import { Avatar } from "../shared/Avatar";
 
 interface PostcardProps {

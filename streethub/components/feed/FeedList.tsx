@@ -1,6 +1,6 @@
 import { mockPosts } from '@/data/mockData';
 import { mock } from 'node:test';
-import { PostCard } from '@/app/components/feed/PostCard';
+import { PostCard } from '@/components/feed/PostCard';
 // ⚠️  mockPosts → substituir por dados reais: await fetch('/api/feed/posts')
 
 export function FeedList() {

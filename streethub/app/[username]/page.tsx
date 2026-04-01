@@ -2,13 +2,13 @@
 
 import { use, useState } from "react";
 import { notFound } from "next/navigation";
-import { Sidebar } from "../components/feed/Sidebar";
-import { Rightsidebar } from "../components/feed/Rightsidebar";
-import { BottomNav } from "../components/shared/BottomNav";
-import { ProfileHeader } from "../components/profile/Profileheader";
-import { ProfileTabs } from "../components/profile/Profiletabs";
-import { ProfileContent } from "../components/profile/Profilecontent";
-import type { ActiveTab } from "../components/profile/Profiletabs";
+import { Sidebar } from "../../components/layout/Sidebar";
+import { Rightsidebar } from "../../components/layout/RightSidebar";
+import { BottomNav } from "../../components/shared/BottomNav";
+import { ProfileHeader } from "../../components/profile/ProfileHeader";
+import { ProfileTabs } from "../../components/profile/ProfileTabs";
+import { ProfileContent } from "../../components/profile/ProfileContent";
+import type { ActiveTab } from "../../components/profile/ProfileTabs";
 import { mockUsers, mockPosts } from "@/data/mockData";
 
 

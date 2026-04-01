@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
-import type { Post } from '@/type/feed';
+import type { Post } from '@/types/feed';
 
 interface PostInfoProps {
     post: Post;

@@ -1,4 +1,4 @@
-import { User, Supplier, Post, TrendingCategory } from "@/type/feed";
+import { User, Supplier, Post, TrendingCategory } from "@/types/feed";
 
 export const mockUsers: User[] = [ 
     {

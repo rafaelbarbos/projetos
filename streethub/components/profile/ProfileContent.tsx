@@ -1,7 +1,7 @@
 import { Grid3x3, Bookmark } from "lucide-react";
 import { PostCard } from "../feed/PostCard";
-import type { User, Post } from "@/type/feed";
-import type { ActiveTab } from "./Profiletabs";
+import type { User, Post } from "@/types/feed";
+import type { ActiveTab } from "./ProfileTabs";
 import { use } from "react";
 
 interface ProfileContentProps {

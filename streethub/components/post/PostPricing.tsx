@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CheckCircle, AlertCircle } from "lucide-react";
-import type { Post } from "@/type/feed";
+import type { Post } from "@/types/feed";
 
 interface PostPricingProps{
     post: Post;

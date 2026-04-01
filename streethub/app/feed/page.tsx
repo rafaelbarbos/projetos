@@ -1,9 +1,9 @@
-import { Sidebar } from "@/app/components/feed/Sidebar";
-import { Rightsidebar } from "../components/feed/Rightsidebar";
-import { FeedHeader } from "@/app/components/feed/FeedHeader";
-import { FeedFilters } from "../components/feed/FeedFilters";
-import { FeedList } from "@/app/components/feed/FeedList";
-import { BottomNav } from "../components/shared/BottomNav";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { Rightsidebar } from "../../components/layout/RightSidebar";
+import { FeedHeader } from "@/components/feed/FeedHeader";
+import { FeedFilters } from "../../components/feed/FeedFilters";
+import { FeedList } from "@/components/feed/FeedList";
+import { BottomNav } from "../../components/shared/BottomNav";
 
 export default function FeedPage() {
   return (

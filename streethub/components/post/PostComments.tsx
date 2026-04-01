@@ -12,7 +12,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Send, Heart, CheckCircle } from 'lucide-react';
-import { Avatar } from '@/app/components/shared/Avatar';
+import { Avatar } from '@/components/shared/Avatar';
 import { currentUser } from '@/data/mockData';
 import type { Post } from '@/types/feed';
 
