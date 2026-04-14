@@ -14,7 +14,7 @@ const menuItems = [
     { icon: Compass, label: 'Explorar', path: '/explore' },
     { icon: Store, label: 'Fornecedores', path: '/suppliers' },
     { icon: Calculator, label: 'Calculadora', path: '/calculator' },
-    { icon: Crown, label: 'Premium', path: '/premium' },
+ // { icon: Crown, label: 'Premium', path: '/premium' },
     { icon: User, label: 'Perfil', path: `/${currentUser.username}` },
     { icon: Settings, label: 'Configurações', path: '/settings' },
 ];

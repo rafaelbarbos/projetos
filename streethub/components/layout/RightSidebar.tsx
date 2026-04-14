@@ -27,7 +27,7 @@ export function Rightsidebar() {
                                     <p className="font-medium text-white text-sm">
                                         {user.displayName}
                                     </p>
-                                    {user.isVerified && <CheckCircle className="w-4 h-4 text-blue-500 flex-shrink-0" />}
+                                    {user.verified && <CheckCircle className="w-4 h-4 text-blue-500 flex-shrink-0" />}
                                 </div>
                                 <p className="text-xs text-neutral-500">
                                     @{user.username}
@@ -68,7 +68,7 @@ export function Rightsidebar() {
                 </div>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-yellow-500">★ {supplier.rating}</span>
+                <span className="text-yellow-500">★ {supplier.ratting}</span>
                 <span className="text-green-400">{supplier.responseTime}</span>
               </div>
             </Link>

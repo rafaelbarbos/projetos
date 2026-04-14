@@ -57,11 +57,11 @@ export const mockUsers: User[] = [
 ]
 
 export const mockSuppliers: Supplier[] = [
-    { id: '1', name: 'Yupoo Fashion Store', rating: 4.8, totalOrders: 15420, verified: true,  responseTime: '< 2h', avatar: '🏪' },
-    { id: '2', name: 'Taobao Premium',      rating: 4.9, totalOrders: 23100, verified: true,  responseTime: '< 1h', avatar: '🛍️' },
-    { id: '3', name: 'Weidian Streetwear',  rating: 4.6, totalOrders: 8900,  verified: true,  responseTime: '< 3h', avatar: '👕' },
-    { id: '4', name: '1688 Direct',         rating: 4.7, totalOrders: 12300, verified: false, responseTime: '< 5h', avatar: '📦' },
-    { id: '5', name: 'Pandabuy Goods',      rating: 4.9, totalOrders: 34200, verified: true,  responseTime: '< 1h', avatar: '🐼' },
+    { id: '1', name: 'Yupoo Fashion Store', ratting: 4.8, totalOrders: 15420, verified: true,  responseTime: '< 2h', avatar: '🏪' },
+    { id: '2', name: 'Taobao Premium',      ratting: 4.9, totalOrders: 23100, verified: true,  responseTime: '< 1h', avatar: '🛍️' },
+    { id: '3', name: 'Weidian Streetwear',  ratting: 4.6, totalOrders: 8900,  verified: true,  responseTime: '< 3h', avatar: '👕' },
+    { id: '4', name: '1688 Direct',         ratting: 4.7, totalOrders: 12300, verified: false, responseTime: '< 5h', avatar: '📦' },
+    { id: '5', name: 'Pandabuy Goods',      ratting: 4.9, totalOrders: 34200, verified: true,  responseTime: '< 1h', avatar: '🐼' },
 ];
 
 export const mockPosts: Post[] = [
