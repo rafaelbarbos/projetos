@@ -27,7 +27,7 @@ export function PostInfo({ post }: PostInfoProps) {
                             <span className='font-semibold text-white text-lg'>
                                 {post.user.displayName}
                             </span>
-                            {post.user.isVerified && <CheckCircle className='w-5 h-5 text-blue-500' /> }
+                            {post.user.verified && <CheckCircle className='w-5 h-5 text-blue-500' /> }
                     </Link>
                     <p className='text-sm text-neutral-500'>
                         {post.timestamp}
@@ -44,10 +44,14 @@ export function PostInfo({ post }: PostInfoProps) {
                 <h1 className='text-2xl font-bold text-white'>
                     {post.title}
                 </h1>
-                <span className='px-3 py-1 bg-neutral-800 rounded-full text-neutral-400 text-sm whitespace-nowrap flex-shrink-0'>
-        
+                <span className='px-3 py-1 bg-neutral-800 rounded-full text-neutral-400 text-sm whitespace-nowrap shrink-0'>
+                    {post.category}
                 </span>
-            </div>        
+            </div>
+
+            {post.description && (
+              <p className='text-neutral-300 leading-relaxed'>{post.description}</p>
+            )}
         </div>
     );
 }

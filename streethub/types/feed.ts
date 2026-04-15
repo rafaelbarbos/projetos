@@ -25,7 +25,12 @@ export interface ShippingAgent {
     name: string;
     avatar: string;
     averageDelivery: string;
+    verified?: boolean;
+    rating?: number;
+    totalOrders?: number;
 }
+
+export type PostVote = 'green' | 'red' | null;
 
 export interface Comment {
     id: string;
@@ -38,16 +43,25 @@ export interface Comment {
 export interface Post {
     id: string;
     user: User;
-    image: string;
+    image?: string;
+    images?: string[];
     title: string;
+    description?: string;
     priceYuan: number;
     priceReal: number;
-    supplier: Supplier;
-    taxed: boolean;
-    likes: number;
+    supplier?: Supplier;
+    shippingAgent?: ShippingAgent;
+    productLink?: string;
+    weight?: number;
+    warehouseTime?: string;
+    taxed?: boolean;
+    likes?: number;
+    greenLights?: number;
+    redLights?: number;
+    userVote?: PostVote;
     comments: Comment[];
     saved: boolean;
-    liked: boolean;
+    liked?: boolean;
     timestamp: string;
     category: string;
 }

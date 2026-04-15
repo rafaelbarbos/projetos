@@ -30,6 +30,12 @@ export default function PostDetailPage({
         notFound();
     }
 
+        const postImages = post.images && post.images.length > 0
+            ? post.images
+            : post.image
+            ? [post.image]
+            : [];
+
     return (
         <div className="min-h-screen bg-neutral-950">
             <Sidebar />
@@ -51,7 +57,7 @@ export default function PostDetailPage({
                     {/* Layout em duas colunas no desktop, coluna unica no mobile */}
                     <div className="grid lg:grid-cols-2 gap-8">
 
-                        <PostImage src={post.image} alt={post.title} />
+                        <PostImage images={postImages} alt={post.title} />
                         {/* Coluna direita - detalhe + comentários */}
                         <div className="space-y-6">
                             

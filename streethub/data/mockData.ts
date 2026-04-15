@@ -65,10 +65,10 @@ export const mockSuppliers: Supplier[] = [
 ];
 
 export const mockShippingAgents: ShippingAgent[] = [
-  { id: '1', name: 'Pandabuy', avatar: '🐼', averageDelivery: '7-15 dias' },
-  { id: '2', name: 'CSSBuy', avatar: '📦', averageDelivery: '10-20 dias' },
-  { id: '3', name: 'Superbuy', avatar: '✈️', averageDelivery: '8-18 dias' },
-  { id: '4', name: 'Sugargoo', avatar: '🍬', averageDelivery: '9-19 dias' },
+  { id: '1', name: 'Pandabuy', avatar: '🐼', averageDelivery: '7-15 dias', verified: true, rating: 4.9, totalOrders: 34200 },
+  { id: '2', name: 'CSSBuy', avatar: '📦', averageDelivery: '10-20 dias', verified: true, rating: 4.7, totalOrders: 22800 },
+  { id: '3', name: 'Superbuy', avatar: '✈️', averageDelivery: '8-18 dias', verified: true, rating: 4.8, totalOrders: 19100 },
+  { id: '4', name: 'Sugargoo', avatar: '🍬', averageDelivery: '9-19 dias', verified: false, rating: 4.6, totalOrders: 15400 },
 ];
 
 export const mockPosts: Post[] = [
@@ -247,6 +247,34 @@ export const mockPosts: Post[] = [
     comments: []
   }
 ];
+
+const fallbackDescriptions = [
+  'Tecido premium e ótimo caimento. Vale muito pelo custo-benefício.',
+  'Batch muito consistente. Acabamento e conforto acima da média.',
+  'Peça técnica com material leve e resistente para uso diário.',
+  'Modelagem boa e estampa bem definida, sem aspecto lavado.',
+  'Ótima opção para composição streetwear casual.',
+  'Acessório com acabamento limpo e bom material.',
+  'Boa capacidade interna e construção reforçada.',
+  'Jaqueta com ótimo visual e bom nível de detalhe.',
+];
+
+mockPosts.forEach((post, index) => {
+  post.images = post.images && post.images.length > 0
+    ? post.images.slice(0, 5)
+    : post.image
+    ? [post.image]
+    : [];
+
+  post.description = post.description ?? fallbackDescriptions[index % fallbackDescriptions.length];
+  post.productLink = post.productLink ?? `https://www.pandabuy.com/product/${post.id}`;
+  post.shippingAgent = post.shippingAgent ?? mockShippingAgents[index % mockShippingAgents.length];
+  post.weight = post.weight ?? Number((0.4 + (index % 5) * 0.2).toFixed(1));
+  post.warehouseTime = post.warehouseTime ?? `${2 + (index % 4)} dias`;
+  post.greenLights = post.greenLights ?? (post.likes ?? 0);
+  post.redLights = post.redLights ?? Math.max(8, Math.round((post.greenLights ?? 0) * 0.18));
+  post.userVote = post.userVote ?? null;
+});
 
 // ── Usuário logado (mock) ──────────────────────────────────────────────────
 // Substituir pelo contexto de autenticação quando o backend estiver pronto.
