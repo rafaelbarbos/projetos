@@ -1,4 +1,4 @@
-import { User, Supplier, Post, TrendingCategory } from "@/types/feed";
+import { User, Supplier, Post, TrendingCategory, ShippingAgent } from "@/types/feed";
 
 export const mockUsers: User[] = [ 
     {
@@ -62,6 +62,13 @@ export const mockSuppliers: Supplier[] = [
     { id: '3', name: 'Weidian Streetwear',  ratting: 4.6, totalOrders: 8900,  verified: true,  responseTime: '< 3h', avatar: '👕' },
     { id: '4', name: '1688 Direct',         ratting: 4.7, totalOrders: 12300, verified: false, responseTime: '< 5h', avatar: '📦' },
     { id: '5', name: 'Pandabuy Goods',      ratting: 4.9, totalOrders: 34200, verified: true,  responseTime: '< 1h', avatar: '🐼' },
+];
+
+export const mockShippingAgents: ShippingAgent[] = [
+  { id: '1', name: 'Pandabuy', avatar: '🐼', averageDelivery: '7-15 dias' },
+  { id: '2', name: 'CSSBuy', avatar: '📦', averageDelivery: '10-20 dias' },
+  { id: '3', name: 'Superbuy', avatar: '✈️', averageDelivery: '8-18 dias' },
+  { id: '4', name: 'Sugargoo', avatar: '🍬', averageDelivery: '9-19 dias' },
 ];
 
 export const mockPosts: Post[] = [

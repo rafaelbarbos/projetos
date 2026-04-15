@@ -20,6 +20,13 @@ export interface Supplier {
     avatar: string;
 }
 
+export interface ShippingAgent {
+    id: string;
+    name: string;
+    avatar: string;
+    averageDelivery: string;
+}
+
 export interface Comment {
     id: string;
     user: User;
