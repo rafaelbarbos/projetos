@@ -12,7 +12,7 @@ export default function Onboarding() {
             <TrendingUp className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-6xl font-black text-white mb-4">
-            Bem-vindo ao <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">StreetHub</span>
+            Bem-vindo ao <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">ImportHub</span>
           </h1>
           <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
             A comunidade definitiva para amantes de streetwear importado. Descubra, compartilhe e importe as melhores peças da China.

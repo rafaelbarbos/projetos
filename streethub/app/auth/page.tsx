@@ -1,8 +1,9 @@
 import { AuthLeftPanel } from '@/components/auth/AuthLeftPainel';
 import { AuthForm }       from '@/components/auth/AuthForm';   
 import { AuthSocialButtons } from '../../components/auth/AuthSocialButtons'; 
-import { MobileLogo } from '../../components/auth/MobileLogo';
+import { MobileLogo } from '../../components/shared/MobileLogo';
 import { AuthFooter } from '../../components/auth/AuthFooter';
+
 
 
 export default function AuthPage() {
