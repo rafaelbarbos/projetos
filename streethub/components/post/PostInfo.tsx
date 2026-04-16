@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
 import type { Post } from '@/types/feed';
+import { currentUser } from '@/data/mockData';
+import { useMockFollowing } from '@/hooks/useMockFollowing';
 
 interface PostInfoProps {
     post: Post;
 }
 
 export function PostInfo({ post }: PostInfoProps) {
+    const isOwnPost = currentUser.id === post.user.id;
+    const { isFollowing, toggleFollowing } = useMockFollowing(post.user.id);
+
     return (
         <div className='space-y-4'>
 
@@ -33,9 +40,19 @@ export function PostInfo({ post }: PostInfoProps) {
                         {post.timestamp}
                     </p>
                 </div>
-                <button className='px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-medium text-sm transition-colors'>
-                    Seguir
-                </button>
+                {!isOwnPost && (
+                    <button
+                        type='button'
+                        onClick={toggleFollowing}
+                        className={`px-4 py-2 rounded-lg text-white font-medium text-sm transition-colors ${
+                            isFollowing
+                                ? 'bg-neutral-800 hover:bg-neutral-700 border border-neutral-700'
+                                : 'bg-purple-600 hover:bg-purple-700'
+                        }`}
+                    >
+                        {isFollowing ? 'Seguindo' : 'Seguir'}
+                    </button>
+                )}
             </div>
 
             {/* Título e categoria */}

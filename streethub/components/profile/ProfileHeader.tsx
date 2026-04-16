@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { CheckCircle, MapPin, Calendar, Settings } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
 import type { User } from '@/types/feed';
+import { useMockFollowing } from '@/hooks/useMockFollowing';
 
 interface ProfileHeaderProps {
   user: User;
@@ -12,7 +12,7 @@ interface ProfileHeaderProps {
 }
 
 export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderProps) {
-        const [isFollowing, setIsFollowing] = useState(false);
+    const { isFollowing, toggleFollowing } = useMockFollowing(user.id);
 
     return (
         <div className='bg-neutral-900 rounded-2xl border border-neutral-800 mb-8'>
@@ -57,7 +57,7 @@ export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderP
                                                 </button>
                                                 <button
                                                     type='button'
-                                                    onClick={() => setIsFollowing((prev) => !prev)}
+                                                    onClick={toggleFollowing}
                                                     className={`px-6 py-2 rounded-lg text-white font-medium transition-all text-sm ${
                                                         isFollowing
                                                             ? 'bg-neutral-800 hover:bg-neutral-700 border border-neutral-700'
