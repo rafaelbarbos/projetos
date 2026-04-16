@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import { Sidebar } from "../../components/layout/Sidebar";
 import { Rightsidebar } from "../../components/layout/RightSidebar";
@@ -9,7 +9,7 @@ import { ProfileHeader } from "../../components/profile/ProfileHeader";
 import { ProfileTabs } from "../../components/profile/ProfileTabs";
 import { ProfileContent } from "../../components/profile/ProfileContent";
 import type { ActiveTab } from "../../components/profile/ProfileTabs";
-import { mockUsers, mockPosts } from "@/data/mockData";
+import { currentUser, mockUsers, mockPosts } from "@/data/mockData";
 
 
 //   mockUsers e mockPosts → substituir por:
@@ -28,11 +28,19 @@ export default function UserProfilePage({
 // Mock — substituir por fetch(`/api/users/${params.username}`)
 
     const user = mockUsers.find((u) => u.username === username);
-    console.log('total de usuários carregados:', mockUsers.length);
 
     if (!user) {
         notFound();
     }
+
+        const isOwnProfile = currentUser.username === user.username;
+
+        useEffect(() => {
+            if (!isOwnProfile && activeTab === 'saved') {
+                setActiveTab('posts');
+            }
+        }, [activeTab, isOwnProfile]);
+
 // Filtra os posts desse usuário
 // ⚠️  Mock — substituir por fetch(`/api/users/${params.username}/posts`)
     const userPosts = mockPosts.filter((p) => p.user.username === username);
@@ -48,17 +56,20 @@ export default function UserProfilePage({
                     <ProfileHeader
                         user={user}
                         postsCount={userPosts.length}
+                        isOwnProfile={isOwnProfile}
                     />
 
                     <ProfileTabs
                         activeTab={activeTab}
                         onTabChange={setActiveTab}
+                        canSeeSaved={isOwnProfile}
                     />
 
                     <ProfileContent
                         activeTab={activeTab}
                         user={user}
                         userPosts={userPosts}
+                        canSeeSaved={isOwnProfile}
                     />
                 </div>
 

@@ -2,15 +2,15 @@ import { Grid3x3, Bookmark } from "lucide-react";
 import { PostCard } from "../feed/PostCard";
 import type { User, Post } from "@/types/feed";
 import type { ActiveTab } from "./ProfileTabs";
-import { use } from "react";
 
 interface ProfileContentProps {
     activeTab: ActiveTab;
     user: User;
     userPosts: Post[];
+    canSeeSaved: boolean;
 }
 
-export function ProfileContent({ activeTab, user, userPosts }: ProfileContentProps) {
+export function ProfileContent({ activeTab, user, userPosts, canSeeSaved }: ProfileContentProps) {
     if (activeTab === 'posts') {
         return (
             <div className="space-y-6">
@@ -32,6 +32,16 @@ export function ProfileContent({ activeTab, user, userPosts }: ProfileContentPro
             </div>
         );
     }
+
+        if (!canSeeSaved) {
+            return (
+                <div className="text-center py-16">
+                    <Bookmark className="w-16 h-16 text-neutral-700 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-white mb-2">Conteúdo privado</h3>
+                    <p className="text-neutral-400">A aba de salvos só está disponível no seu próprio perfil.</p>
+                </div>
+            );
+        }
 
     return (
         <div className="text-center py-16">
