@@ -1,21 +1,14 @@
 import Link from "next/link";
 import { CheckCircle, ExternalLink, Weight, Clock } from "lucide-react";
 import type { Post } from "@/types/feed";
+import { usePostShippingAgent } from "./hooks";
 
 interface PostPricingProps{
     post: Post;
 }
 
 export function PostPricing ({post}: PostPricingProps){
-        const shippingAgent = post.shippingAgent ?? {
-            id: post.supplier?.id ?? 'unknown',
-            name: post.supplier?.name ?? 'Agente não informado',
-            avatar: post.supplier?.avatar ?? '📦',
-            averageDelivery: post.supplier?.responseTime ?? '-',
-            verified: post.supplier?.verified ?? false,
-            rating: post.supplier?.ratting,
-            totalOrders: post.supplier?.totalOrders,
-        };
+    const shippingAgent = usePostShippingAgent(post);
 
     return(
         <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800">
@@ -63,10 +56,11 @@ export function PostPricing ({post}: PostPricingProps){
                         href={post.productLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 inline-flex items-center gap-2 px-3 py-2 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 rounded-lg text-sm text-purple-400 transition-colors"
+                                                className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-purple-600/30 hover:bg-purple-600/40 border border-purple-500/60 rounded-xl text-sm font-medium text-purple-100 shadow-[0_0_0_1px_rgba(168,85,247,0.2)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60"
+                                                aria-label="Abrir link do produto"
                       >
                         <ExternalLink className="w-4 h-4" />
-                        Link do produto
+                                                Ver produto
                       </a>
                     )}
 

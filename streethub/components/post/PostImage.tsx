@@ -1,16 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import type { Post } from '@/types/feed';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { usePostMedia } from './hooks';
 
 // Coluna esquerda - imagens do post
 interface PostImageProps {
-        images: string[];
-    alt: string;
+  post: Post;
 }
 
-export function PostImage({ images, alt }: PostImageProps) {
-        const [currentImageIndex, setCurrentImageIndex] = useState(0);
-        const safeImages = images.slice(0, 5);
+export function PostImage({ post }: PostImageProps) {
+    const { images, currentImageIndex, setCurrentImageIndex } = usePostMedia(post);
+    const safeImages = images;
+
+    const goToPrevious = () => {
+        const previousIndex = currentImageIndex === 0 ? safeImages.length - 1 : currentImageIndex - 1;
+        setCurrentImageIndex(previousIndex);
+    };
+
+    const goToNext = () => {
+        const nextIndex = currentImageIndex === safeImages.length - 1 ? 0 : currentImageIndex + 1;
+        setCurrentImageIndex(nextIndex);
+    };
 
         if (safeImages.length === 0) {
             return null;
@@ -21,7 +32,7 @@ export function PostImage({ images, alt }: PostImageProps) {
                         <div className="aspect-square bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 relative group">
                             <img
                                 src={safeImages[currentImageIndex]}
-                                alt={alt}
+                                alt={post.title}
                                 className="w-full h-full object-cover"
                             />
 
@@ -30,6 +41,24 @@ export function PostImage({ images, alt }: PostImageProps) {
                                     <div className="absolute top-4 right-4 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-xs text-white font-medium">
                                         {currentImageIndex + 1}/{safeImages.length}
                                     </div>
+
+                                    <button
+                                        type="button"
+                                        onClick={goToPrevious}
+                                        className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/65 text-white hover:bg-black/80 transition-colors"
+                                        aria-label="Imagem anterior"
+                                    >
+                                        <ChevronLeft className="w-5 h-5" />
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={goToNext}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/65 text-white hover:bg-black/80 transition-colors"
+                                        aria-label="Próxima imagem"
+                                    >
+                                        <ChevronRight className="w-5 h-5" />
+                                    </button>
 
                                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                                         {safeImages.map((_, index) => (

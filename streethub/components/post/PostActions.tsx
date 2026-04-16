@@ -3,54 +3,17 @@
 // src/components/post/PostActions.tsx
 // 'use client' necessário por useState (liked, saved)
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { ThumbsUp, ThumbsDown, MessageCircle, Bookmark, Calculator } from 'lucide-react';
 import type { Post } from '@/types/feed';
+import { usePostEngagement } from './hooks';
 
 interface PostActionsProps {
   post: Post;
 }
 
 export function PostActions({ post }: PostActionsProps) {
-  const [saved, setSaved] = useState(post.saved);
-  const [userVote, setUserVote] = useState<'green' | 'red' | null>(post.userVote ?? null);
-  const [greenLights, setGreenLights] = useState(post.greenLights ?? post.likes ?? 0);
-  const [redLights, setRedLights] = useState(post.redLights ?? Math.max(0, Math.round((post.likes ?? 0) * 0.15)));
-
-  const handleVote = (voteType: 'green' | 'red') => {
-    if (userVote === voteType) {
-      if (voteType === 'green') {
-        setGreenLights((prev) => Math.max(0, prev - 1));
-      } else {
-        setRedLights((prev) => Math.max(0, prev - 1));
-      }
-
-      setUserVote(null);
-      return;
-    }
-
-    if (userVote === 'green') {
-      setGreenLights((prev) => Math.max(0, prev - 1));
-    }
-
-    if (userVote === 'red') {
-      setRedLights((prev) => Math.max(0, prev - 1));
-    }
-
-    if (voteType === 'green') {
-      setGreenLights((prev) => prev + 1);
-    } else {
-      setRedLights((prev) => prev + 1);
-    }
-
-    setUserVote(voteType);
-  };
-
-  const handleSave = () => {
-    setSaved(!saved);
-    // ⚠️ Mock — substituir por: await fetch(`/api/posts/${post.id}/save`, { method: 'POST' })
-  };
+  const { saved, userVote, greenLights, redLights, handleVote, handleSave } = usePostEngagement(post);
 
   return (
     <div className="space-y-4 py-4 border-y border-neutral-800">

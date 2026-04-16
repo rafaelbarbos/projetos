@@ -76,6 +76,11 @@ export const mockPosts: Post[] = [
     id: "1",
     user: mockUsers[0],
     image: "https://images.unsplash.com/photo-1721111260570-456f3306f8d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1721111260570-456f3306f8d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200"
+    ],
     title: "Essentials Hoodie Oversized - Bege Premium",
     priceYuan: 158,
     priceReal: 112.50,
@@ -107,6 +112,12 @@ export const mockPosts: Post[] = [
     id: "2",
     user: mockUsers[1],
     image: "https://images.unsplash.com/photo-1761942028138-2b494760aa3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1761942028138-2b494760aa3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200"
+    ],
     title: "Dunk Low Panda - Replica 1:1",
     priceYuan: 280,
     priceReal: 199.00,
@@ -178,6 +189,11 @@ export const mockPosts: Post[] = [
     id: "5",
     user: mockUsers[3],
     image: "https://images.unsplash.com/photo-1649850874075-49e014357b9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1649850874075-49e014357b9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200"
+    ],
     title: "Cargo Pants Tactical - Verde Militar",
     priceYuan: 145,
     priceReal: 103.15,
@@ -234,6 +250,11 @@ export const mockPosts: Post[] = [
     id: "8",
     user: mockUsers[1],
     image: "https://images.unsplash.com/photo-1760126070359-5b82710274fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+    images: [
+      "https://images.unsplash.com/photo-1760126070359-5b82710274fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+      "https://images.unsplash.com/photo-1556906781-9a412961c28c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200"
+    ],
     title: "Bomber Jacket Reversível - Preto/Laranja",
     priceYuan: 312,
     priceReal: 222.00,

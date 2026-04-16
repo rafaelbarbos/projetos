@@ -7,7 +7,7 @@ import { FeedHeader } from "@/components/feed/FeedHeader";
 import { FeedFilters } from "../../components/feed/FeedFilters";
 import { FeedList } from "@/components/feed/FeedList";
 import { BottomNav } from "../../components/shared/BottomNav";
-import { CreatePost } from "@/components/create-post/CreatePost";
+import { CreatePost } from "@/components/feed/create-post/CreatePost";
 
 export default function FeedPage() {
   const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);

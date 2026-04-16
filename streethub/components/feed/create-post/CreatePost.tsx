@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { mockShippingAgents, mockSuppliers } from '@/data/mockData';
-import { CreatePostActions } from '@/components/create-post/CreatePostActions';
-import { CreatePostDetailsSection } from '@/components/create-post/CreatePostDetailsSection';
-import { CreatePostHeader } from '@/components/create-post/CreatePostHeader';
-import { CreatePostImageSection } from '@/components/create-post/CreatePostImageSection';
-import { CreatePostPartnersSection } from '@/components/create-post/CreatePostPartnersSection';
+import { CreatePostActions } from './CreatePostActions';
+import { CreatePostDetailsSection } from './CreatePostDetailsSection';
+import { CreatePostHeader } from './CreatePostHeader';
+import { CreatePostImageSection } from './CreatePostImageSection';
+import { CreatePostPartnersSection } from './CreatePostPartnersSection';
 import { CreatePostFormData, CreatePostProps } from '@/types/create-post';
 
 const CREATE_POST_CATEGORIES = ['Moletom', 'Tênis', 'Jaqueta', 'Camiseta', 'Calça', 'Acessórios'];
