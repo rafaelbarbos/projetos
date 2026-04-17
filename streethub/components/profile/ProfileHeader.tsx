@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { CheckCircle, MapPin, Calendar, Settings } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
 import type { User } from '@/types/feed';
@@ -9,10 +10,30 @@ interface ProfileHeaderProps {
   user: User;
   postsCount: number;
     isOwnProfile: boolean;
+    onOpenFollowers: () => void;
+    onOpenFollowing: () => void;
 }
 
-export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderProps) {
-    const { isFollowing, toggleFollowing } = useMockFollowing(user.id);
+export function ProfileHeader({
+    user,
+    postsCount,
+    isOwnProfile,
+    onOpenFollowers,
+    onOpenFollowing,
+}: ProfileHeaderProps) {
+        const { isFollowing, toggleFollowing } = useMockFollowing(user.id);
+        const [copiedProfileLink, setCopiedProfileLink] = useState(false);
+
+        const handleShareProfile = async () => {
+            if (typeof window === 'undefined' || !navigator?.clipboard) {
+                return;
+            }
+
+            const profileUrl = `${window.location.origin}/${user.username}`;
+            await navigator.clipboard.writeText(profileUrl);
+            setCopiedProfileLink(true);
+            window.setTimeout(() => setCopiedProfileLink(false), 1600);
+        };
 
     return (
         <div className='bg-neutral-900 rounded-2xl border border-neutral-800 mb-8'>
@@ -34,11 +55,7 @@ export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderP
                 {/* Avatar + açoes */}
                 <div className='flex flex-col sm:flex-row sm:items-end sm:justify-between -mt-16 mb-6 gap-4 relative z-10'>
                     <div className='border-4 border-neutral-900 rounded-full w-fit'>
-                        <Avatar
-                            src={user.avatar}
-                            name={user.displayName}
-                            size='lg'
-                            />
+                        <Avatar src={user.avatar} name={user.displayName} size='lg' />
                     </div>
 
                                         {isOwnProfile ? (
@@ -46,8 +63,15 @@ export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderP
                                                 <button className='px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg text-white font-medium transition-colors text-sm'>
                                                     Editar Perfil
                                                 </button>
+                                                <button
+                                                    type='button'
+                                                    onClick={handleShareProfile}
+                                                    className='px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg text-white font-medium transition-colors text-sm'
+                                                >
+                                                    {copiedProfileLink ? 'Link Copiado' : 'Compartilhar'}
+                                                </button>
                                                 <button className='p-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg text-white transition-colors'>
-                                                    <Settings className='w-5 h-5'/>
+                                                    <Settings className='w-5 h-5' />
                                                 </button>
                                             </div>
                                         ) : (
@@ -115,20 +139,32 @@ export function ProfileHeader({ user, postsCount, isOwnProfile }: ProfileHeaderP
                         </p>
                     </div>
                     <div className='text-center p-3 md:p-4 bg-neutral-950 rounded-xl border border-neutral-800'>
-                        <p className='text-xl md:text-2xl font-bold text-white mb-1'>
+                                                <button
+                                                    type='button'
+                                                    onClick={onOpenFollowers}
+                                                    className='w-full hover:bg-neutral-900 rounded-lg transition-colors py-1'
+                                                >
+                                                    <p className='text-xl md:text-2xl font-bold text-white mb-1'>
                             {user.followers.toLocaleString()}
-                        </p>
-                        <p className='text-xs md:text-sm text-neutral-400'>
+                                                    </p>
+                                                    <p className='text-xs md:text-sm text-neutral-400'>
                             Seguidores
-                        </p>
+                                                    </p>
+                                                </button>
                     </div>
                     <div className='text-center p-3 md:p-4 bg-neutral-950 rounded-xl border border-neutral-800'>
-                        <p className='text-xl md:text-2xl font-bold text-white mb-1'>
+                                                <button
+                                                    type='button'
+                                                    onClick={onOpenFollowing}
+                                                    className='w-full hover:bg-neutral-900 rounded-lg transition-colors py-1'
+                                                >
+                                                    <p className='text-xl md:text-2xl font-bold text-white mb-1'>
                             {user.following.toLocaleString()}
-                        </p>
-                        <p className='text-xs md:text-sm text-neutral-400'>
+                                                    </p>
+                                                    <p className='text-xs md:text-sm text-neutral-400'>
                             Seguindo
-                        </p>
+                                                    </p>
+                                                </button>
                     </div>
                     <div className='text-center p-3 md:p-4 bg-linear-to-br from-purple-600/10 to-pink-600/10 rounded-xl border border-purple-500/20'>
                         <p className='text-xl md:text-2xl font-bold text-purple-400 mb-1'>

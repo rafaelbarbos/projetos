@@ -8,6 +8,7 @@ import { BottomNav } from "../../components/shared/BottomNav";
 import { ProfileHeader } from "../../components/profile/ProfileHeader";
 import { ProfileTabs } from "../../components/profile/ProfileTabs";
 import { ProfileContent } from "../../components/profile/ProfileContent";
+import { ProfileConnectionsModal } from "../../components/profile/ProfileConnectionsModal";
 import type { ActiveTab } from "../../components/profile/ProfileTabs";
 import { currentUser, mockUsers, mockPosts } from "@/data/mockData";
 
@@ -23,6 +24,10 @@ export default function UserProfilePage({
 }) {
     const { username } = use(params);
     const [activeTab, setActiveTab] = useState<ActiveTab>("posts");
+        const [connectionsModal, setConnectionsModal] = useState<{ open: boolean; type: 'followers' | 'following' }>({
+            open: false,
+            type: 'followers',
+        });
 
 // Busca o usuário pelo username da URL
 // Mock — substituir por fetch(`/api/users/${params.username}`)
@@ -45,6 +50,16 @@ export default function UserProfilePage({
 // ⚠️  Mock — substituir por fetch(`/api/users/${params.username}/posts`)
     const userPosts = mockPosts.filter((p) => p.user.username === username);
 
+        const followersPreview = mockUsers
+            .filter((u) => u.id !== user.id)
+            .slice(0, Math.min(user.followers, 12));
+
+        const followingPreview = mockUsers
+            .filter((u) => u.id !== user.id)
+            .slice(1, Math.min(user.following + 1, 13));
+
+        const modalUsers = connectionsModal.type === 'followers' ? followersPreview : followingPreview;
+
     return (
         <div className="min-h-screen bg-neutral-950">
             <Sidebar />
@@ -57,6 +72,8 @@ export default function UserProfilePage({
                         user={user}
                         postsCount={userPosts.length}
                         isOwnProfile={isOwnProfile}
+                        onOpenFollowers={() => setConnectionsModal({ open: true, type: 'followers' })}
+                        onOpenFollowing={() => setConnectionsModal({ open: true, type: 'following' })}
                     />
 
                     <ProfileTabs
@@ -74,6 +91,13 @@ export default function UserProfilePage({
                 </div>
 
             </main>
+
+            <ProfileConnectionsModal
+                isOpen={connectionsModal.open}
+                title={connectionsModal.type === 'followers' ? 'Seguidores' : 'Seguindo'}
+                users={modalUsers}
+                onClose={() => setConnectionsModal((prev) => ({ ...prev, open: false }))}
+            />
         </div>
     );
 
