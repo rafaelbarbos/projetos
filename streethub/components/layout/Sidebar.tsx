@@ -12,7 +12,7 @@ import { Avatar } from "../shared/Avatar";
 const menuItems = [
     { icon: Home, label: 'Feed', path: '/feed' },
     { icon: Compass, label: 'Explorar', path: '/explore' },
-    { icon: Store, label: 'Fornecedores', path: '/suppliers' },
+  //{ icon: Store, label: 'Fornecedores', path: '/suppliers' },
     { icon: Calculator, label: 'Calculadora', path: '/calculator' },
  // { icon: Crown, label: 'Premium', path: '/premium' },
     { icon: User, label: 'Perfil', path: `/${currentUser.username}` },
