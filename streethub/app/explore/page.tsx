@@ -19,14 +19,17 @@ import {
 import type { ExploreTab, SortMode, QuickFilterId, SupplierOverview } from '@/components/explore';
 
 export default function ExplorePage() {
+  // Estado da interface para troca de aba, busca e critérios de ranking.
   const [activeTab, setActiveTab] = useState<ExploreTab>('posts');
   const [search, setSearch] = useState('');
   const [activeQuick, setActiveQuick] = useState<QuickFilterId>('trend');
   const [activeCategory, setActiveCategory] = useState('Todas');
   const [sortMode, setSortMode] = useState<SortMode>('quality');
 
+  // Lista dinâmica de categorias a partir dos posts mockados.
   const categories = useMemo(() => ['Todas', ...new Set(mockPosts.map((post) => post.category))], []);
 
+  // Pipeline de descoberta: filtra por busca/categoria e aplica ordenações.
   const filteredPosts = useMemo(() => {
     const query = normalizeText(search);
 
@@ -79,6 +82,7 @@ export default function ExplorePage() {
     return ranked;
   }, [activeCategory, activeQuick, search, sortMode]);
 
+  // Constrói o ranking de agentes de envio com score composto.
   const supplierOverview = useMemo<SupplierOverview[]>(() => {
     const query = normalizeText(search);
 
@@ -102,6 +106,7 @@ export default function ExplorePage() {
       .sort((a, b) => b.score - a.score);
   }, [search]);
 
+  // Lista de usuários sugeridos ordenada por reputação.
   const usersOverview = useMemo(() => {
     const query = normalizeText(search);
 
@@ -143,6 +148,7 @@ export default function ExplorePage() {
               onSortModeChange={setSortMode}
             />
 
+            {/* A aba ativa decide qual grade renderizar. */}
             {activeTab === 'posts' && (
               <ExplorePostGrid posts={filteredPosts} />
             )}

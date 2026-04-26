@@ -9,9 +9,11 @@ import {
 } from '@/lib/mockFollowStore';
 
 export function useMockFollowing(userId: string) {
+  // Inicializa com o valor persistido para evitar flicker na UI.
   const [isFollowing, setIsFollowing] = useState<boolean>(() => getMockFollowing(userId));
 
   useEffect(() => {
+    // Reidrata quando o userId muda e sincroniza eventos externos.
     setIsFollowing(getMockFollowing(userId));
 
     const unsubscribe = subscribeMockFollowing((changedUserId) => {
@@ -24,6 +26,7 @@ export function useMockFollowing(userId: string) {
   }, [userId]);
 
   const toggleFollowing = useCallback(() => {
+    // Atualização otimista local com persistência no store mock.
     const next = toggleMockFollowing(userId);
     setIsFollowing(next);
     return next;
@@ -31,6 +34,7 @@ export function useMockFollowing(userId: string) {
 
   const setFollowing = useCallback(
     (value: boolean) => {
+      // Define explicitamente o follow para fluxos de botão/sugestão.
       setMockFollowing(userId, value);
       setIsFollowing(value);
     },

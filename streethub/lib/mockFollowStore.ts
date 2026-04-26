@@ -3,10 +3,12 @@ const FOLLOW_EVENT_NAME = 'streethub:follow-state-changed';
 
 type FollowStateMap = Record<string, boolean>;
 
+// Evita acessar APIs do navegador durante SSR.
 function isBrowser(): boolean {
   return typeof window !== 'undefined';
 }
 
+// Lê o mapa de follows salvo localmente; falhas retornam estado vazio.
 function readFollowState(): FollowStateMap {
   if (!isBrowser()) {
     return {};
@@ -25,6 +27,7 @@ function readFollowState(): FollowStateMap {
   }
 }
 
+// Persiste o estado completo no localStorage.
 function writeFollowState(nextState: FollowStateMap): void {
   if (!isBrowser()) {
     return;
@@ -33,6 +36,7 @@ function writeFollowState(nextState: FollowStateMap): void {
   window.localStorage.setItem(FOLLOW_STORAGE_KEY, JSON.stringify(nextState));
 }
 
+// Notifica a aplicação de mudanças imediatas na mesma aba.
 function emitFollowStateChange(userId: string): void {
   if (!isBrowser()) {
     return;
@@ -41,11 +45,13 @@ function emitFollowStateChange(userId: string): void {
   window.dispatchEvent(new CustomEvent(FOLLOW_EVENT_NAME, { detail: { userId } }));
 }
 
+// Retorna se o usuário atual está sendo seguido.
 export function getMockFollowing(userId: string): boolean {
   const state = readFollowState();
   return Boolean(state[userId]);
 }
 
+// Atualiza o estado de follow para um usuário específico.
 export function setMockFollowing(userId: string, isFollowing: boolean): void {
   const state = readFollowState();
   state[userId] = isFollowing;
@@ -53,6 +59,7 @@ export function setMockFollowing(userId: string, isFollowing: boolean): void {
   emitFollowStateChange(userId);
 }
 
+// Alterna o follow e devolve o novo valor.
 export function toggleMockFollowing(userId: string): boolean {
   const current = getMockFollowing(userId);
   const next = !current;
@@ -60,6 +67,7 @@ export function toggleMockFollowing(userId: string): boolean {
   return next;
 }
 
+// Escuta mudanças entre abas (storage) e na mesma aba (evento customizado).
 export function subscribeMockFollowing(listener: (userId?: string) => void): () => void {
   if (!isBrowser()) {
     return () => {};
