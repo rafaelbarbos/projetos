@@ -8,7 +8,7 @@ import { AuthFooter } from '../../components/auth/AuthFooter';
 
 export default function AuthPage() {
     return (
-        <div className="min-h-screen bg-black bg-gradient-to-br from-neutral-950 via-purple-950/20 to neutral-950 flex">
+        <div className="min-h-screen bg-black bg-gradient-to-br from-neutral-950 via-purple-950/20 to-neutral-950 flex">
             {/*Lado esquerdo - só aparece em telas grandes*/}
             <AuthLeftPanel/>
 

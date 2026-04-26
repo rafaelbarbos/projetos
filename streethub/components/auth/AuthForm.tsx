@@ -90,9 +90,13 @@ export function AuthForm() {
                         />
                         Lembrar-me
                     </label>
-                    <a href="#NEHUM LINK AINDA" className='text-purple-400 hover:text-purple-400 transition-colors'>
+                    <button
+                        type="button"
+                        onClick={() => router.push('/auth/forgot')}
+                        className='text-purple-400 hover:text-purple-300 transition-colors'
+                    >
                         Esqueceu a senha?
-                    </a>
+                    </button>
                 </div>
             )}
             
@@ -107,8 +111,8 @@ export function AuthForm() {
         <div className='mt-6 text-center'>
             <p className='text-neutral-400 text-sm'>
                 {isLogin 
-                    ? "Não tem uma conta?" 
-                    : "Já tem uma conta?"}
+                    ? "Não tem uma conta? " 
+                    : "Já tem uma conta? "}
                 <button
                     onClick={() => setIsLogin(!isLogin)}
                     className='text-purple-400 hover:text-purple-300 font-semibold transition-colors'

@@ -13,7 +13,7 @@ export interface User {
 export interface Supplier {
     id: string;
     name: string;
-    ratting: number;
+    rating: number;
     totalOrders: number;
     verified: boolean;
     responseTime: string; // em horas

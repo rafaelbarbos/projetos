@@ -55,7 +55,7 @@ export function Rightsidebar() {
                     {mockSuppliers.filter((s) => s.verified).slice(0, 3).map((supplier) => (
                         <Link
                             key={supplier.id}
-                            href={`/supplier/${supplier.id}`}
+                        href={`/suppliers/${supplier.id}`}
                             className="block p-3 bg-neutral-900 rounded-xl border border-neutral-800 hover:bg-neutral-800 hover:border-neutral-700 transition-all"
                         >
                             <div className="flex items-center gap-3 mb-2">
@@ -69,7 +69,7 @@ export function Rightsidebar() {
                                 </div>
                             </div>
                             <div className="flex items-center justify-between text-xs">
-                                <span className="text-yellow-500">★ {supplier.ratting}</span>
+                              <span className="text-yellow-500">★ {supplier.rating}</span>
                                 <span className="text-green-400">{supplier.responseTime}</span>
                             </div>
                         </Link>

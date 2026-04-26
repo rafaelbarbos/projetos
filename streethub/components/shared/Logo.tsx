@@ -1,4 +1,4 @@
-import { Plane, TrendingUp } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 
 type LogoVariant = 'default' | 'hero';
 
@@ -12,7 +12,7 @@ export function Logo({ variant = 'default', className = '' }: LogoProps) {
     return (
       <div className={`flex items-center gap-3 mb-8 ${className}`.trim()}>
         <div className='w-12 h-12 bg-linear-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center'>
-          <Plane className='w-7 h-7 text-white' />
+          <TrendingUp className='w-7 h-7 text-white' />
         </div>
         <div>
           <h1 className='font-black text-2xl text-white'>ImportHub</h1>

@@ -19,7 +19,7 @@ export function usePostShippingAgent(post: Post): NormalizedShippingAgent {
       avatar: post.shippingAgent?.avatar ?? post.supplier?.avatar ?? '📦',
       averageDelivery: post.shippingAgent?.averageDelivery ?? post.supplier?.responseTime ?? '-',
       verified: post.shippingAgent?.verified ?? post.supplier?.verified ?? false,
-      rating: post.shippingAgent?.rating ?? post.supplier?.ratting,
+      rating: post.shippingAgent?.rating ?? post.supplier?.rating,
       totalOrders: post.shippingAgent?.totalOrders ?? post.supplier?.totalOrders,
     }),
     [post.shippingAgent, post.supplier]
