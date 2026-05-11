@@ -1,0 +1,47 @@
+package com.streethub.auth.controller;
+
+import jakarta.validation.Valid;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.streethub.auth.dto.LoginRequest;
+import com.streethub.auth.dto.LoginResponse;
+import com.streethub.auth.dto.RegisterRequest;
+import com.streethub.auth.service.AuthService;
+import com.streethub.users.dto.UserResponse;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest req) {
+        UserResponse resp = authService.register(req);
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest req) {
+        LoginResponse resp = authService.login(req);
+        return ResponseEntity.ok(resp);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> me(@AuthenticationPrincipal UserDetails user) {
+        if (user == null) return ResponseEntity.ok("anonymous");
+        return ResponseEntity.ok(user.getUsername());
+    }
+}

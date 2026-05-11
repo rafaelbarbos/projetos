@@ -15,6 +15,11 @@ spring:
   flyway:
     enabled: true
 
+jwt:
+  # base64 secret for HMAC. Replace in production with a secure random key
+  secret: VGhpcyBpcyBhIHNhbXBsZS1zZWNyZXQtc3RyaW5nLWFuZC1zaG91bGQtYmUtY2hhbmdlZA==
+  expiration-ms: 86400000
+
 server:
   port: 3001
 
