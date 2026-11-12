@@ -7,16 +7,20 @@ import Link from 'next/link';
 import { ThumbsUp, ThumbsDown, MessageCircle, Bookmark, Calculator } from 'lucide-react';
 import type { Post } from '@/types/feed';
 import { usePostEngagement } from './hooks';
+import { ReportButton } from '@/components/shared/ReportButton';
+import { reportPost } from '@/lib/reportApi';
 
 interface PostActionsProps {
   post: Post;
 }
 
 export function PostActions({ post }: PostActionsProps) {
-  const { saved, userVote, greenLights, redLights, handleVote, handleSave } = usePostEngagement(post);
+  const { saved, userVote, greenLights, redLights, error, handleVote, handleSave } = usePostEngagement(post);
 
   return (
     <div className="space-y-4 py-4 border-y border-neutral-800">
+
+      {error && <p className="text-xs text-red-400">{error}</p>}
 
       <div className="flex items-center gap-3">
         <button
@@ -60,6 +64,8 @@ export function PostActions({ post }: PostActionsProps) {
         >
           <Bookmark className={`w-6 h-6 ${saved ? 'fill-current' : ''}`} />
         </button>
+
+        <ReportButton onReport={(reason) => reportPost(post.id, reason)} />
 
         <Link
           href={`/calculator?yuan=${post.priceYuan}`}

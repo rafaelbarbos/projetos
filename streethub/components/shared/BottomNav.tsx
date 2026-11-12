@@ -3,18 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Compass, Store, Calculator, User } from "lucide-react";
-import { currentUser } from "@/data/mockData";
+import { useAuth } from "@/components/auth/AuthProvider";
 
-const items = [
-    { icon: Home,       path: '/feed',       label: 'Feed'        },
-    { icon: Compass,    path: '/explore',    label: 'Explorar'    },
-    { icon: Store,      path: '/suppliers',  label: 'Fornecedores'},
-    { icon: Calculator, path: '/calculator', label: 'Calculadora' },
-    { icon: User,       path: `/${currentUser.username}`,    label: 'Perfil'      },
-];
-
-export function BottomNav() { 
+export function BottomNav() {
     const pathname = usePathname();
+    const { user } = useAuth();
+
+    const items = [
+        { icon: Home,       path: '/feed',       label: 'Feed'        },
+        { icon: Compass,    path: '/explore',    label: 'Explorar'    },
+        { icon: Store,      path: '/suppliers',  label: 'Fornecedores'},
+        { icon: Calculator, path: '/calculator', label: 'Calculadora' },
+        { icon: User,       path: user ? `/${user.username}` : '#',    label: 'Perfil'      },
+    ];
 
     return (
         // Barra de navegação inferior visível apenas em telas pequenas

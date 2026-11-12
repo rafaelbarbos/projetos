@@ -4,16 +4,17 @@ import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 import { Avatar } from '../shared/Avatar';
 import type { Post } from '@/types/feed';
-import { currentUser } from '@/data/mockData';
-import { useMockFollowing } from '@/hooks/useMockFollowing';
+import { useFollow } from '@/hooks/useFollow';
+import { useAuth } from '@/components/auth/AuthProvider';
 
 interface PostInfoProps {
     post: Post;
 }
 
 export function PostInfo({ post }: PostInfoProps) {
-    const isOwnPost = currentUser.id === post.user.id;
-    const { isFollowing, toggleFollowing } = useMockFollowing(post.user.id);
+    const { user } = useAuth();
+    const isOwnPost = user?.id === post.user.id;
+    const { isFollowing, toggleFollowing } = useFollow(post.user.username);
 
     return (
         <div className='space-y-4'>

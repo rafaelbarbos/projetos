@@ -18,7 +18,7 @@ Criar arquivo `.env.local` na raiz:
 
 ```env
 # API & Backend
-NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_API_URL=http://localhost:8000
 NEXT_PUBLIC_API_TIMEOUT=5000
 
 # Autenticação
@@ -48,7 +48,7 @@ npm run dev
 
 | Variável | Tipo | Padrão | Descrição |
 |----------|------|--------|-----------|
-| `NEXT_PUBLIC_API_URL` | string | `http://localhost:3001` | URL base da API |
+| `NEXT_PUBLIC_API_URL` | string | `http://localhost:8000` | URL base da API |
 | `NEXT_PUBLIC_API_TIMEOUT` | number | `5000` | Timeout em ms para requisições |
 | `NEXT_PUBLIC_USE_MOCK_DATA` | boolean | `true` | Usar mocks em desenvolvimento |
 | `NEXT_PUBLIC_AUTH_ENABLED` | boolean | `true` | Habilitar autenticação |
@@ -99,30 +99,43 @@ npm run dev
 
 ## 🔌 API & Backend
 
-### Endpoints Esperados
+O backend é o `streethub-api/` (Python + FastAPI + PostgreSQL), um projeto
+irmão deste, fora da pasta `streethub/`. Ver `streethub-api/README.md` para
+como rodar localmente (Docker Compose + Alembic + seed).
 
-#### Feed
-```
-GET /api/feed/posts          - Listar posts do feed
-GET /api/feed/posts/:id      - Detalhe de um post
-POST /api/feed/posts         - Criar novo post
-```
-
-#### Posts
-```
-GET /api/posts/:id                    - Detalhe do post
-POST /api/posts/:id/vote              - Votar no post (GL/RL)
-POST /api/posts/:id/save              - Salvar post
-POST /api/posts/:id/comments          - Adicionar comentário
-```
+### Endpoints implementados
 
 #### Autenticação
 ```
-POST /api/auth/login                  - Login
-POST /api/auth/register               - Registro
-POST /api/auth/logout                 - Logout
-GET /api/auth/me                      - Usuário atual
+POST /api/auth/register               - Registro (retorna o usuário criado)
+POST /api/auth/login                  - Login (username ou email + senha, retorna {token})
+GET  /api/auth/me                     - Usuário atual (Bearer token)
 ```
+Sem `logout` no servidor: o JWT é stateless, "logout" é só remover o token
+guardado no cliente (`localStorage`/`sessionStorage`, via `lib/authApi.ts`).
+
+#### Feed e posts
+```
+GET  /api/feed/posts                  - Listar posts do feed (paginado, filtro por categoria)
+GET  /api/feed/posts/:id              - Detalhe de um post
+POST /api/posts/:id/vote              - Votar no post ({ vote: "green" | "red" | null })
+POST /api/posts/:id/save              - Salvar/dessalvar post (toggle)
+POST /api/posts/:id/comments          - Adicionar comentário ({ text })
+```
+
+#### Usuários e fornecedores
+```
+GET    /api/users/:username           - Perfil público
+POST   /api/users/:username/follow    - Seguir
+DELETE /api/users/:username/follow    - Deixar de seguir
+GET    /api/suppliers                 - Listar fornecedores
+```
+
+### Fora do escopo atual (não implementado)
+- `POST /api/feed/posts` (criar post com upload de imagem) — fica para quando
+  a tela de criação de post for ligada à API real.
+- Busca/filtros avançados, notificações, moderação — ver roadmap em
+  `docs/mvp-funcionalidades.md`.
 
 ### Mock Data
 

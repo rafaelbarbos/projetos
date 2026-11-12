@@ -4,7 +4,7 @@ import { usePostEngagement, usePostMedia, usePostShippingAgent } from '@/compone
 export const usePostCardState = (post: Post) => {
   const { images, currentImageIndex, setCurrentImageIndex } = usePostMedia(post);
   const shippingAgent = usePostShippingAgent(post);
-  const { saved, userVote, greenLights, redLights, totalVotes, greenRatio, handleVote, handleSave } = usePostEngagement(post);
+  const { saved, userVote, greenLights, redLights, totalVotes, greenRatio, error, handleVote, handleSave } = usePostEngagement(post);
 
   return {
     saved,
@@ -17,6 +17,7 @@ export const usePostCardState = (post: Post) => {
     shippingAgent,
     totalVotes,
     greenRatio,
+    error,
     handleVote,
     handleSave,
   };

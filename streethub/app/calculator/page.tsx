@@ -9,11 +9,8 @@
 // - Resultado separado em CalculatorResultPanel
 // - Responsividade adicionada (ml-0 md:ml-64 etc.)
 //
-// FUTURA INTEGRAÇÃO COM API DE CÂMBIO:
-// 1. Criar src/hooks/useExchangeRate.ts
-// 2. const { rate, updatedAt } = useExchangeRate()
-// 3. Passar rate para CalculatorForm via prop exchangeRate
-// 4. CalculatorForm repassa para calculateTotal() via input.exchangeRate
+// Câmbio real: ver hooks/useExchangeRate.ts (AwesomeAPI, com fallback fixo
+// via streethub-api/app/routers/calculator.py se a fonte externa falhar).
 
 import { useState, Suspense } from 'react';
 import { Calculator as CalcIcon } from 'lucide-react';

@@ -2,23 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Compass, User, Store, Calculator, Crown, Settings, TrendingUp } from "lucide-react";
+import { Home, Compass, User, Store, Calculator, Crown, Settings, TrendingUp, LogOut } from "lucide-react";
 import { Logo } from '@/components/shared/Logo';
-import { currentUser } from "@/data/mockData";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { Avatar } from "../shared/Avatar";
-
-const menuItems = [
-    { icon: Home, label: 'Feed', path: '/feed' },
-    { icon: Compass, label: 'Explorar', path: '/explore' },
-  //{ icon: Store, label: 'Fornecedores', path: '/suppliers' },
-    { icon: Calculator, label: 'Calculadora', path: '/calculator' },
- // { icon: Crown, label: 'Premium', path: '/premium' },
-    { icon: User, label: 'Perfil', path: `/${currentUser.username}` },
-    { icon: Settings, label: 'Configurações', path: '/settings' },
-];
 
 export function Sidebar() {
     const pathname = usePathname();
+    const { user, logout } = useAuth();
+
+    const menuItems = [
+        { icon: Home, label: 'Feed', path: '/feed' },
+        { icon: Compass, label: 'Explorar', path: '/explore' },
+      //{ icon: Store, label: 'Fornecedores', path: '/suppliers' },
+        { icon: Calculator, label: 'Calculadora', path: '/calculator' },
+     // { icon: Crown, label: 'Premium', path: '/premium' },
+        { icon: User, label: 'Perfil', path: user ? `/${user.username}` : '#' },
+        { icon: Settings, label: 'Configurações', path: '/settings' },
+    ];
 
     return(
         <aside className="fixed left-0 top-0 h-screen w-64 bg-neutral-950 border-r border-neutral-850 flex flex-col p-6 hidden md:flex">
@@ -54,27 +55,37 @@ export function Sidebar() {
             </nav>
 
             {/* Usuário logado */}
-            {/* ⚠️  Dados mock — substituir por dados reais do contexto de auth */}
-            <div className="pt-6 border-t border-neutral-800">
-                <Link
-                    href={`/${currentUser.username}`}
-                    className="flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-900 transition-all"
+            {user && (
+                <div className="pt-6 border-t border-neutral-800 flex items-center gap-2">
+                    <Link
+                        href={`/${user.username}`}
+                        className="flex-1 flex items-center gap-3 p-3 rounded-xl hover:bg-neutral-900 transition-all min-w-0"
+                        >
+                            <Avatar
+                                src={user.avatar ?? ''}
+                                name={user.displayName}
+                                size="md"
+                                />
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-medium text-white text-sm truncate">
+                                        @{user.username}
+                                    </p>
+                                    <p className="text-xs text-neutral-500">
+                                        Ver perfil
+                                    </p>
+                                </div>
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={logout}
+                        aria-label="Sair"
+                        title="Sair"
+                        className="p-3 rounded-xl text-neutral-500 hover:text-white hover:bg-neutral-900 transition-all"
                     >
-                        <Avatar 
-                            src={currentUser.avatar} 
-                            name={currentUser.displayName} 
-                            size="md"
-                            /> 
-                            <div className="flex-1 min-w-0">
-                                <p className="font-medium text-white text-sm truncate">
-                                    @{currentUser.username}
-                                </p>
-                                <p className="text-xs text-neutral-500">
-                                    Ver perfil
-                                </p>
-                            </div>
-                </Link>
-            </div>
+                        <LogOut className="w-5 h-5" />
+                    </button>
+                </div>
+            )}
         </aside>
     );
 }

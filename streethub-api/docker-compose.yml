@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: streethub-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${STREETHUB_DB_NAME:-streethub}
+      POSTGRES_USER: ${STREETHUB_DB_USERNAME:-streethub}
+      POSTGRES_PASSWORD: ${STREETHUB_DB_PASSWORD:-streethub}
+    ports:
+      - "5432:5432"
+    volumes:
+      - streethub_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${STREETHUB_DB_USERNAME:-streethub} -d ${STREETHUB_DB_NAME:-streethub}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  streethub_postgres_data:

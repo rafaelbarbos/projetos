@@ -30,6 +30,7 @@ export function PostCard({ post }: PostCardProps) {
     images,
     shippingAgent,
     greenRatio,
+    error,
     handleVote,
   } = usePostCardState(post);
 
@@ -88,6 +89,8 @@ export function PostCard({ post }: PostCardProps) {
           greenRatio={greenRatio}
           onVote={handleVote}
         />
+
+        {error && <p className="text-xs text-red-400 mb-3">{error}</p>}
 
         {/* Ações: Comentários, Salvar, Calcular */}
         <PostActions

@@ -1,6 +1,6 @@
 'use client';
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -9,25 +9,61 @@ import { Rightsidebar } from "@/components/layout/RightSidebar";
 import { BottomNav } from "@/components/shared/BottomNav";
 import { PostImage } from "@/components/post/PostImage";
 import { PostInfo } from "@/components/post/PostInfo";
-import { mockPosts } from "@/data/mockData";
 import { PostPricing } from "@/components/post/PostPricing";
 import { PostActions } from "@/components/post/PostActions";
 import { PostComments } from "@/components/post/PostComments";
+import { getPost } from "@/lib/feedApi";
+import { ApiError } from "@/lib/apiClient";
+import type { Post } from "@/types/feed";
 
-
-// mockPosts → substituir por GET /api/posts/:id
-
-export default function PostDetailPage({ 
-    params, 
+export default function PostDetailPage({
+    params,
 }: {
     params: Promise<{ id: string }>;
 }) {
     const { id } = use(params);
+    // key={id} força remontar ao trocar de post, assim o estado inicial
+    // (loading=true, isMissing=false, post=null) já nasce correto sem
+    // precisar resetar sincronamente dentro do effect.
+    return <PostDetailContent key={id} id={id} />;
+}
 
-    const post = mockPosts.find((p) => p.id === id);
+function PostDetailContent({ id }: { id: string }) {
+    const [post, setPost] = useState<Post | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [isMissing, setIsMissing] = useState(false);
 
-    if (!post) {
+    useEffect(() => {
+        let active = true;
+
+        getPost(id)
+            .then((data) => {
+                if (active) setPost(data);
+            })
+            .catch((err) => {
+                if (active && err instanceof ApiError && err.status === 404) {
+                    setIsMissing(true);
+                }
+            })
+            .finally(() => {
+                if (active) setLoading(false);
+            });
+
+        return () => {
+            active = false;
+        };
+    }, [id]);
+
+    if (isMissing) {
         notFound();
+    }
+
+    if (loading || !post) {
+        return (
+            <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
+                <p className="text-neutral-500">Carregando post...</p>
+            </div>
+        );
     }
 
     return (
@@ -54,14 +90,14 @@ export default function PostDetailPage({
                         <PostImage post={post} />
                         {/* Coluna direita - detalhe + comentários */}
                         <div className="space-y-6">
-                            
+
                             <PostInfo post={post} />
                             <PostPricing post={post} />
                             <PostActions post={post} />
                             <PostComments post={post} />
                         </div>
                     </div>
-                    
+
                 </div>
             </main>
         </div>

@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Package, Plane, AlertCircle } from 'lucide-react';
 import { calculateTotal, RATES, type CalculatorInput, type CalculatorResult } from '@/lib/calculator';
+import { useExchangeRate } from '@/hooks/useExchangeRate';
 
 interface CalculatorFormProps {
   onCalcChange: (result: CalculatorResult, input: CalculatorInput) => void;
@@ -20,23 +21,24 @@ interface CalculatorFormProps {
 export function CalculatorForm({ onCalcChange }: CalculatorFormProps) {
   const searchParams   = useSearchParams();
   const initialYuan    = searchParams.get('yuan') || '';
+  const { rate, updatedAtLabel, isLive } = useExchangeRate();
 
   const [priceYuan,      setPriceYuan]      = useState(initialYuan);
   const [weight,         setWeight]         = useState('0.5');
   const [shippingMethod, setShippingMethod] = useState<'standard' | 'express'>('standard');
   const [taxed,          setTaxed]          = useState(false);
 
-  // Recalcula sempre que qualquer input mudar
+  // Recalcula sempre que qualquer input (ou a cotação) mudar
   useEffect(() => {
     const input: CalculatorInput = {
       priceYuan:      parseFloat(priceYuan) || 0,
       weightKg:       parseFloat(weight)    || 0,
       shippingMethod,
       taxed,
-      // exchangeRate: rate, ← descomentar quando hook da API estiver pronto
+      exchangeRate: rate,
     };
     onCalcChange(calculateTotal(input), input);
-  }, [priceYuan, weight, shippingMethod, taxed]);
+  }, [priceYuan, weight, shippingMethod, taxed, rate]);
 
   return (
     <div className="space-y-6">
@@ -56,9 +58,9 @@ export function CalculatorForm({ onCalcChange }: CalculatorFormProps) {
             className="w-full bg-neutral-950 border border-neutral-800 rounded-xl pl-12 pr-4 py-4 text-white text-2xl font-bold placeholder:text-neutral-600 focus:outline-none focus:border-purple-500 transition-colors"
           />
         </div>
-        {/* ⚠️ Cotação estática — substituir por valor da API quando disponível */}
         <p className="text-xs text-neutral-500 mt-2">
-          Cotação atual: 1 ¥ = R$ {RATES.YUAN_TO_BRL.toFixed(2)}
+          Cotação {isLive ? 'atual' : 'estimada'}: 1 ¥ = R$ {rate.toFixed(2)}
+          {updatedAtLabel && (isLive ? ` · atualizada ${updatedAtLabel}` : ' (fonte de câmbio indisponível, usando valor de referência)')}
         </p>
       </div>
 

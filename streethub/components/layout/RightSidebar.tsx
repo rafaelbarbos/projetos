@@ -3,18 +3,23 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CheckCircle, UserCheck, UserPlus, X } from "lucide-react";
-import { currentUser, mockUsers, mockSuppliers } from "@/data/mockData";
+import { mockUsers, mockSuppliers } from "@/data/mockData";
 import { Avatar } from "@/components/shared/Avatar";
 import type { User } from "@/types/feed";
 import { useMockFollowing } from "@/hooks/useMockFollowing";
+import { useAuth } from "@/components/auth/AuthProvider";
 
-// ⚠️  Todos os dados aqui são mock — substituir por:
+// ⚠️  Sugestões/fornecedores aqui são mock — substituir por:
 //   mockUsers          → GET /api/users/suggestions
 //   mockSuppliers      → GET /api/suppliers/featured
 //   trendingCategories → GET /api/categories/trending
 
 export function Rightsidebar() {
-  const initialSuggestions = useMemo(() => mockUsers.filter((user) => user.id !== currentUser.id).slice(0, 6), []);
+  const { user: currentUser } = useAuth();
+  const initialSuggestions = useMemo(
+    () => mockUsers.filter((user) => user.id !== currentUser?.id).slice(0, 6),
+    [currentUser?.id],
+  );
   const [suggestions, setSuggestions] = useState(initialSuggestions);
 
   const dismissSuggestion = (userId: string) => {

@@ -57,7 +57,6 @@ export function CalculatorResultPanel({ result, input }: CalculatorResultProps) 
             R$ {result.total.toFixed(2)}
           </span>
         </div>
-        {/* ⚠️ exchangeRateUsed virá da API futuramente */}
         <p className="text-xs text-neutral-500 text-right">
           ≈ ¥{input.priceYuan || 0} × {result.exchangeRateUsed.toFixed(2)} + taxas
         </p>

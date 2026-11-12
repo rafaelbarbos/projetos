@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { MessageCircle, Bookmark, Calculator } from 'lucide-react';
+import { ReportButton } from '@/components/shared/ReportButton';
+import { reportPost } from '@/lib/reportApi';
 
 interface PostActionsProps {
   postId: string;
@@ -36,6 +38,8 @@ export function PostActions({
       >
         <Bookmark className={`w-6 h-6 ${saved ? 'fill-current' : ''}`} />
       </button>
+
+      <ReportButton onReport={(reason) => reportPost(postId, reason)} />
 
       <Link
         href={`/calculator?yuan=${priceYuan}`}
